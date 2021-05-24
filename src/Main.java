@@ -15,17 +15,17 @@ public class Main {
 		for(int i=0;i<cantPuntos;i++)
 			arr[i] = new Punto(random.nextInt(MAX_VALUE),random.nextInt(MAX_VALUE));
 		
-		for(Punto punto:arr)
-			System.out.println("X: " + punto.getX() + " Y: " + punto.getY());
+		//for(Punto punto:arr)
+			//System.out.println("X: " + punto.getX() + " Y: " + punto.getY());
 		
 		double distanciaMinimaNaive = distanciaNaive(arr);
 		System.out.println("Distancia minima algoritmo naive: " + distanciaMinimaNaive);
 		
-		//double distanciaMinimaOrdX = distanciaOrdX(arr);
-		//System.out.println("Distancia minima ordenados por x: " + distanciaMinimaOrdX);
+		double distanciaMinimaOrdX = distanciaOrdX(arr);
+		System.out.println("Distancia minima ordenados por x: " + distanciaMinimaOrdX);
 		
-		//double distanciaMinimaOrdXY = distanciaOrdXY(arr);
-		//System.out.println("Distancia minima ordenados por x e y: " + distanciaMinimaOrdXY);
+		double distanciaMinimaOrdXY = distanciaOrdXY(arr);
+		System.out.println("Distancia minima ordenados por x e y: " + distanciaMinimaOrdXY);
 	}
 	
 	/********************************	 Distancia Naive   ************************************/
@@ -56,6 +56,7 @@ public class Main {
 		if(arr.length < SMALL_INSTANCE)
 			return distanciaNaive(arr);
 		
+		int medio2 = arr[arr.length-1].getX()/2;
 		int medio = ((arr.length - 1)/2);
 		int tamanio1 = medio +1;
 		int tamanio2 = arr.length - tamanio1;
@@ -146,11 +147,32 @@ public class Main {
 	}
 	
 	private static Punto[] crearFranja(Punto[] arr, int medio, double distanciaMinima) {
-		return arr;
+		int cantPuntosFranja = 0;
+		for(int i=0;i<arr.length;i++)
+			if(Math.abs((arr[i].getX() - medio)) < distanciaMinima )
+				cantPuntosFranja++;
+		
+		Punto[] franja = new Punto[cantPuntosFranja];
+		int indice = 0;
+		for(int i=0;i<arr.length;i++)
+			if(Math.abs((arr[i].getX() - medio)) < distanciaMinima )
+				franja[indice++] = arr[i];
+		
+		return franja;
 	}
 	
 	private static double barrido(Punto[] franja) {
-		return 0;
+		double menorDistancia = Double.POSITIVE_INFINITY;
+		double distanciaAB;
+		
+		for(int i=0;i<franja.length;i++)
+			for(int j=i+1;j<7 && j<franja.length;j++) {
+				distanciaAB = Punto.distancia(franja[i],franja[j]);
+				if (distanciaAB < menorDistancia )
+					menorDistancia = distanciaAB;
+			}
+				
+		return menorDistancia;
 	}
 	
 	/*****************************************************************************************/
