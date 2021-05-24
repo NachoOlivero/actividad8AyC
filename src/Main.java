@@ -13,7 +13,7 @@ public class Main {
 		Random random = new Random();
 		
 		for(int i=0;i<cantPuntos;i++)
-			arr[i] = new Punto(random.nextInt(MAX_VALUE),random.nextInt(MAX_VALUE));
+			arr[i] = new Punto(random.nextInt(MAX_VALUE + 1),random.nextInt(MAX_VALUE + 1));
 		
 		//for(Punto punto:arr)
 			//System.out.println("X: " + punto.getX() + " Y: " + punto.getY());
