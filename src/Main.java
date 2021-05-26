@@ -6,12 +6,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		int check = 2;
+		int check = 4;
 		
 		switch (check) {
 			case 1: check1(); break;
 			case 2: check2(); break;
-			case 3: check3(); break;		
+			case 3: check3(); break;
+			case 4: check4(); break;
 		}
 	}
 	
@@ -43,8 +44,8 @@ public class Main {
 	private static void check2() { // para ver cuanto tardan
 		
 		
-		int cantPuntos = (int) Math.pow(2, 13);
-		//int cantPuntos = (int) Math.pow(2, 20);
+		//int cantPuntos = (int) Math.pow(2, 13);
+		int cantPuntos = (int) Math.pow(2, 20);
 		
 		Punto[] arr = new Punto[cantPuntos];
 		Random random = new Random();
@@ -82,5 +83,19 @@ public class Main {
 		
 		for(int i=0;i<cantPuntos;i++)
 			System.out.println("X: " + arr[i].getX() + " Y: " + arr[i].getY() + " I:  " + i);
+	}
+	
+	private static void check4() { // para ver los tiempos promedio para las cantidades de puntos 
+		
+		double [][] r = Benchmarks.benchmarkNaive();
+		//double [][] r = Benchmarks.benchmarkOrdX();
+		//double [][] r = Benchmarks.benchmarkOrdXY();
+		
+		int cantPuntos = Benchmarks.N_NAIVE;
+		//int cantPuntos = Benchmarks.N_ORD;
+		
+		for(int i=0;i<cantPuntos;i++)
+			System.out.println((int)r[i][0]+" "+r[i][1]);
+			
 	}
 }
