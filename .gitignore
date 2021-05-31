@@ -1,4 +1,7 @@
+/.settings
 *.class
+*.classpath
+*.project
 *.log
 *.ctxt
 .mtj.tmp/
